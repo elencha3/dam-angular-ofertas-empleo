@@ -1,0 +1,24 @@
+<div class="container divcenter ">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>OFERTAS DE EMPLEO</h1>
+        </div>
+    </div>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Título</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of this.arrayOffersData">
+                    <th scope="row">{{ item.id }}</th>
+                    <td>{{ item.titulo }}</td>
+                    <td><a (click)="this.viewOfferDetail(item.id)" class="btn btn-link">Detalle</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
