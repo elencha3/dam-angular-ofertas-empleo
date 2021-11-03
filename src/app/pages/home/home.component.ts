@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
     
     this.homeService.getOffersData().subscribe(
       response =>{
-        console.log(this.arrayOffersData = response); 
+        this.arrayOffersData = response; 
       },
       error => {
         console.log('Error ' + JSON.stringify(error));
