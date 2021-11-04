@@ -1,5 +1,5 @@
+import { AuthService } from './../services/auth.services';
 import { RouterModule } from '@angular/router';
-import { HomeService } from './../services/home.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminComponent } from './admin/admin.component';
@@ -9,6 +9,7 @@ import { RegisterOfferComponent } from './register-offer/register-offer.componen
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { OfferDetailComponent } from './offer-detail/offer-detail.component';
+import { ComponentsModule } from '../components/components.module';
 
 @NgModule({
     declarations: [
@@ -16,17 +17,18 @@ import { OfferDetailComponent } from './offer-detail/offer-detail.component';
         HomeComponent,
         LoginComponent,
         RegisterOfferComponent,
-        OfferDetailComponent
+        OfferDetailComponent,
     ],
     imports: [ 
         CommonModule,
         ReactiveFormsModule,
         HttpClientModule,
-        RouterModule
+        RouterModule,
+        ComponentsModule
     ],
     exports: [],
     providers: [
-        HomeService
+        AuthService
     ],
 })
 export class PagesModule {}

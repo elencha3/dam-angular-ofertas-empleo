@@ -1,5 +1,5 @@
+import { AuthService } from './../../services/auth.services';
 import { Offer } from 'src/app/models/offer.model';
-import { HomeService } from 'src/app/services/home.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
@@ -15,7 +15,7 @@ export class OfferDetailComponent implements OnInit {
 
 
   constructor(
-    private homeService: HomeService,
+    private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -29,7 +29,7 @@ export class OfferDetailComponent implements OnInit {
   showOfferDetail() {
     this.sub = this.route.paramMap.subscribe((params: ParamMap) =>{
       let id = params.get('id');
-      this.homeService.getOfferDetail(id).subscribe(
+      this.authService.getOfferDetail(id).subscribe(
         response =>{
           this.offerDetails = response;
         },

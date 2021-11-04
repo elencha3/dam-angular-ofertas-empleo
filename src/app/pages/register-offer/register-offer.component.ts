@@ -1,22 +1,28 @@
+import { AuthService } from './../../services/auth.services';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { OfferForm } from 'src/app/models/offer-form.model';
-import { HomeService } from 'src/app/services/home.service';
 
 @Component({
   selector: 'app-register-offer',
   templateUrl: './register-offer.component.html',
-  styleUrls: ['./register-offer.component.css']
+  styleUrls: ['./register-offer.component.css'],
+  providers: [AuthService]
 })
 export class RegisterOfferComponent implements OnInit {
 
+  user: any;
+
   constructor(
     private formBuilder: FormBuilder,
-    private homeService: HomeService
+    private authService: AuthService
     
-  ) { }
+  ) { 
+    // this.authService.userObservable.subscribe(x => this.user = x);
+  }
 
   ngOnInit(): void {
+    console.log(this.user)
   }
 
   offerFormRegister = this.formBuilder.group({
@@ -39,7 +45,7 @@ export class RegisterOfferComponent implements OnInit {
       this.offerFormRegister.value.email,
     )
 
-    this.homeService.postOffersData(offer).subscribe(offer => console.log(offer));
+    this.authService.postOffersData(offer).subscribe(offer => console.log(offer));
 
   }
 

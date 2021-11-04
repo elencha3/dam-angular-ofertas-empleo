@@ -1,24 +1,25 @@
+import { AuthService } from './../../services/auth.services';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { HomeService } from 'src/app/services/home.service';
+
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  providers: [HomeService]
+  providers: [AuthService]
 })
 export class HomeComponent implements OnInit {
 
   public arrayOffersData: Array<any>;
 
   constructor( 
-    private homeService: HomeService,
+    private authService: AuthService,
     private router: Router) { }
 
   ngOnInit(): void {
     
-    this.homeService.getOffersData().subscribe(
+    this.authService.getOffersData().subscribe(
       response =>{
         this.arrayOffersData = response; 
       },

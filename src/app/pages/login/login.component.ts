@@ -14,42 +14,43 @@ import { LoginForm } from 'src/app/models/login-form.model';
 
 export class LoginComponent implements OnInit {
 
-    constructor(
-      private formBuilder: FormBuilder, 
-      private router: Router, 
-      private authService: AuthService
-    ) { }
+      constructor(
+        private formBuilder: FormBuilder, 
+        private router: Router, 
+        private authService: AuthService
+      ) { }
 
-    ngOnInit(): void {
-    }
+      ngOnInit(): void {
 
-    formularioLogin = this.formBuilder.group({
-      nombre: ['', Validators.required],
-      pass: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
-      check: ['','']
-  })
+        // this.authService.doLogout();
+      }
 
-    enviarFormulario(): void {
-      console.log("Enviando login");
-      //Convertir datos form a objeto
-      let userLog: LoginForm = new LoginForm(
-          this.formularioLogin.value.nombre,
-          this.formularioLogin.value.pass,
-          this.formularioLogin.value.check
-    ) 
+      formularioLogin = this.formBuilder.group({
+        nombre: ['', Validators.required],
+        pass: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
+        check: ['','']
+    })
 
+      enviarFormulario(): void {
+        console.log("Enviando login");
+        //Convertir datos form a objeto
+        let userLog: LoginForm = new LoginForm(
+            this.formularioLogin.value.nombre,
+            this.formularioLogin.value.pass,
+            this.formularioLogin.value.check
+      ) 
 
-      this.authService.login(userLog.nombre, userLog.pass, userLog.check)
-          .subscribe(
-              data => {
+        this.authService.login(userLog.nombre, userLog.pass, userLog.check)
+            .subscribe(
+                response => {
+                  console.log(response.id_token);
+                  this.authService.setToken(response.id_token)
                   this.router.navigate(['/home']);
-                  console.log("logueado");
-                  console.log(data);
-              },
-              error => {
-                    console.log("error");
-                });
-        
-    }
+                    
+                },
+                error => {
+                      console.log("error");
+                  });
+      }
 
-}
+  }

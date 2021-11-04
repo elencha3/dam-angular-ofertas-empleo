@@ -5,6 +5,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { RegisterOfferComponent } from './pages/register-offer/register-offer.component';
 import { LoginComponent } from './pages/login/login.component';
 
+
 const routes: Routes = [
   {
     path: '',
