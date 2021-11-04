@@ -1,3 +1,4 @@
+import { AuthGuard } from './services/authGuard';
 import { OfferDetailComponent } from './pages/offer-detail/offer-detail.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -18,7 +19,8 @@ const routes: Routes = [
   },
   {
     path: 'registerOffer',
-    component: RegisterOfferComponent
+    component: RegisterOfferComponent,
+    canActivate: [AuthGuard]
   },
   {
     path:'offerdetail/:id',

@@ -47,10 +47,17 @@ export class AuthService {
         return this.http.post(url, offer, {headers});
     }
 
-    // logout() {
-    //     localStorage.removeItem('token');
-    //     this.user$.next(null);
-    // }
+    logout() {
+        localStorage.removeItem('id_token');
+    }
+
+    isLogged() : boolean {
+        if (this.getToken() !== null){
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public getOffersData(): Observable<any>{
         return this.http.get(url);

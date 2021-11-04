@@ -1,3 +1,4 @@
+import { AuthGuard } from './services/authGuard';
 import { AuthService } from './services/auth.services';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -22,7 +23,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
   ],
   providers: [
     AuthService,
-    
+    AuthGuard    
   ],
   bootstrap: [AppComponent]
 })

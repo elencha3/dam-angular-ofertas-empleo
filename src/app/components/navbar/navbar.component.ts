@@ -10,24 +10,22 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  user: any;
-
+  
   constructor(
     private router: Router,
     private authService: AuthService
   ) { 
-    // this.authService.userObservable.subscribe(x => this.user = x);
   }
 
   ngOnInit(): void {
-    console.log(this.user);
+    
   }
 
-//   logout() {
-//     this.authService.logout();
-//     console.log(this.user);
-//     this.router.navigate(['/login']);
-// }
+    logout() {
+      this.authService.logout();
+      console.log(this.authService.getToken())
+      this.router.navigate(['/login']);
+    }
 
   
 

@@ -21,8 +21,7 @@ export class LoginComponent implements OnInit {
       ) { }
 
       ngOnInit(): void {
-
-        // this.authService.doLogout();
+        this.authService.isLogged();
       }
 
       formularioLogin = this.formBuilder.group({
@@ -43,7 +42,6 @@ export class LoginComponent implements OnInit {
         this.authService.login(userLog.nombre, userLog.pass, userLog.check)
             .subscribe(
                 response => {
-                  console.log(response.id_token);
                   this.authService.setToken(response.id_token)
                   this.router.navigate(['/home']);
                     

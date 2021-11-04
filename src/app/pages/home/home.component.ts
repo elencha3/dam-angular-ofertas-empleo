@@ -18,6 +18,8 @@ export class HomeComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
+
+    this.authService.isLogged();
     
     this.authService.getOffersData().subscribe(
       response =>{

@@ -11,7 +11,6 @@ import { OfferForm } from 'src/app/models/offer-form.model';
 })
 export class RegisterOfferComponent implements OnInit {
 
-  user: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -22,7 +21,7 @@ export class RegisterOfferComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.user)
+    this.authService.isLogged();
   }
 
   offerFormRegister = this.formBuilder.group({
