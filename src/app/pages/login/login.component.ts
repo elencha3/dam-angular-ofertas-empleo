@@ -8,47 +8,49 @@ import { LoginForm } from 'src/app/models/login-form.model';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [AuthService]
+  providers: [AuthService],
 })
 
-
 export class LoginComponent implements OnInit {
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
-      constructor(
-        private formBuilder: FormBuilder, 
-        private router: Router, 
-        private authService: AuthService
-      ) { }
-
-      ngOnInit(): void {
-        this.authService.isLogged();
-      }
-
-      formularioLogin = this.formBuilder.group({
-        nombre: ['', Validators.required],
-        pass: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
-        check: ['','']
-    })
-
-      enviarFormulario(): void {
-        console.log("Enviando login");
-        //Convertir datos form a objeto
-        let userLog: LoginForm = new LoginForm(
-            this.formularioLogin.value.nombre,
-            this.formularioLogin.value.pass,
-            this.formularioLogin.value.check
-      ) 
-
-        this.authService.login(userLog.nombre, userLog.pass, userLog.check)
-            .subscribe(
-                response => {
-                  this.authService.setToken(response.id_token)
-                  this.router.navigate(['/admin']);
-                    
-                },
-                error => {
-                      console.log("error");
-                  });
-      }
-
+  ngOnInit(): void {
+    this.authService.isLogged();
   }
+
+  formularioLogin = this.formBuilder.group({
+    nombre: ['', Validators.required],
+    pass: [
+      '',
+      Validators.compose([Validators.required, Validators.minLength(4)]),
+    ],
+    check: ['', ''],
+  });
+
+  enviarFormulario(): void {
+    console.log('Enviando login');
+    //Convertir datos form a objeto
+    let userLog: LoginForm = new LoginForm(
+      this.formularioLogin.value.nombre,
+      this.formularioLogin.value.pass,
+      this.formularioLogin.value.check
+    );
+
+    this.authService
+      .login(userLog.nombre, userLog.pass, userLog.check)
+      .subscribe(
+        (response) => {
+          this.authService.setToken(response.id_token);
+          this.router.navigate(['/admin']);
+        },
+        (error) => {
+          window.alert('Las credenciales no son correctas');
+          console.log('error');
+        }
+      );
+  }
+}

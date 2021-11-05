@@ -11,7 +11,6 @@ import { Component, OnInit } from '@angular/core';
 export class AdminComponent implements OnInit {
   public arrayOffersData: Array<any>;
   public sub: any;
-  public totalOffers: number;
 
   constructor(
     private authService: AuthService,
@@ -40,6 +39,7 @@ export class AdminComponent implements OnInit {
     this.authService.deleteOffer(id).subscribe(
       (response) => {
         console.log(response);
+        window.location.reload();
       },
       (error) => {
         console.log('Error ' + JSON.stringify(error));
