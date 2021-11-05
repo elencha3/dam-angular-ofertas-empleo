@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
             .subscribe(
                 response => {
                   this.authService.setToken(response.id_token)
-                  this.router.navigate(['/home']);
+                  this.router.navigate(['/admin']);
                     
                 },
                 error => {

@@ -38,20 +38,11 @@ export class AuthService {
         
     }
 
-    public postOffersData(offer: OfferForm): Observable<any>{
-        const headers = {
-            'Authorization': `Bearer ${this.getToken()}`,
-            'Content-Type': 'application/json',
-        }
-        console.log(this.getToken());
-        return this.http.post(url, offer, {headers});
-    }
-
     logout() {
         localStorage.removeItem('id_token');
     }
 
-    isLogged() : boolean {
+    isLogged(): boolean {
         if (this.getToken() !== null){
             return true;
         } else {
@@ -66,6 +57,25 @@ export class AuthService {
     public getOfferDetail(id: string): Observable<any>{
         let url = `${AppEndPoints.ENDPOINTOFERTAS}/${id}`;
         return this.http.get(url)
+    }
+
+    public postOffersData(offer: OfferForm): Observable<any>{
+        const headers = {
+            'Authorization': `Bearer ${this.getToken()}`,
+            'Content-Type': 'application/json',
+        }
+        return this.http.post(url, offer, {headers});
+    }
+
+    public deleteOffer(id:string): Observable<any>{
+        let url = `${AppEndPoints.ENDPOINTOFERTAS}/${id}`;
+        const headers = {
+            'Authorization': `Bearer ${this.getToken()}`,
+            'Content-Type': 'application/json',
+        }
+        console.log(this.http.delete(url,  {headers}));
+        return this.http.delete(url,  {headers});
+        
     }
 }
 
