@@ -7,12 +7,12 @@
                     <h1>{{this.offerDetails.titulo}}</h1>
                     <p>{{this.offerDetails.descripcion}}</p>
                     <p>{{this.offerDetails.empresa}}</p>
-                    <p>{{this.offerDetails.salario}}</p>
+                    <p>{{this.offerDetails.salario | currency:'EUR' }}</p>
                     <p>{{this.offerDetails.ciudad}}</p>
                     <p>{{this.offerDetails.email}}</p>
 
-                    <h5 class="card-title"></h5>
-                    <a  class="btn btn-primary">VER</a>
+                    <button class="btn" routerLink="/home"><i class="fa fa-arrow-left"></i></button>
+                    
                 </div>
             </div>
         </div>

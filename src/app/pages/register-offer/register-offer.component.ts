@@ -2,6 +2,7 @@ import { AuthService } from './../../services/auth.services';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { OfferForm } from 'src/app/models/offer-form.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-offer',
@@ -14,7 +15,8 @@ export class RegisterOfferComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
     
   ) { 
     // this.authService.userObservable.subscribe(x => this.user = x);
@@ -43,8 +45,8 @@ export class RegisterOfferComponent implements OnInit {
       this.offerFormRegister.value.ciudad,
       this.offerFormRegister.value.email,
     )
-
     this.authService.postOffersData(offer).subscribe(offer => console.log(offer));
+    this.router.navigate(['/admin']);
 
   }
 

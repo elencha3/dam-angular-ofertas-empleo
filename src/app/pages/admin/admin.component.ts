@@ -6,47 +6,44 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css'],
-  providers: [AuthService]
+  providers: [AuthService],
 })
-
 export class AdminComponent implements OnInit {
-
   public arrayOffersData: Array<any>;
   public sub: any;
+  public totalOffers: number;
 
-  constructor( 
+  constructor(
     private authService: AuthService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-
     this.authService.isLogged();
-    
+
     this.authService.getOffersData().subscribe(
-      response =>{
-        this.arrayOffersData = response; 
+      (response) => {
+        this.arrayOffersData = response;
       },
-      error => {
+      (error) => {
         console.log('Error ' + JSON.stringify(error));
       }
-  )
+    );
   }
 
-  public viewOfferDetail(id): void{
+  public viewOfferDetail(id): void {
     this.router.navigate(['offerdetail', id]);
   }
 
-    deleteOffer(id) {
-      this.authService.deleteOffer(id).subscribe(
-        response =>{
-          console.log(response);
-        },
-        error => {
-          console.log('Error ' + JSON.stringify(error));
-        }
-      )
-    
-
+  public deleteOffer(id) {
+    this.authService.deleteOffer(id).subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log('Error ' + JSON.stringify(error));
+      }
+    );
   }
 }
