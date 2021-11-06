@@ -37,7 +37,6 @@ export class RegisterOfferComponent implements OnInit {
 });
 
   addOffer(): void{
-    console.log("Formulario enviado");
     let offer: OfferForm = new OfferForm(
       this.offerFormRegister.value.titulo,
       this.offerFormRegister.value.descripcion,
@@ -47,16 +46,20 @@ export class RegisterOfferComponent implements OnInit {
       this.offerFormRegister.value.email,
     )
     this.authService.postOffersData(offer).subscribe(offer => console.log(offer));
-    Swal.fire({
-      title: 'La nueva oferta ha sido añadida',
-      showClass: {
-        popup: 'animate__animated animate__fadeInDown'
-      },
-      hideClass: {
-        popup: 'animate__animated animate__fadeOutUp'
-      }
-    })
+    // Swal.fire({
+    //   title: 'La nueva oferta ha sido añadida',
+    //   showClass: {
+    //     popup: 'animate__animated animate__fadeInDown'
+    //   },
+    //   hideClass: {
+    //     popup: 'animate__animated animate__fadeOutUp'
+    //   }
+      
+    // })
+    
     this.router.navigate(['/admin']);
+    
+    
 
   }
 

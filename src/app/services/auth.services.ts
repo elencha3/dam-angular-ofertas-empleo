@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { AppEndPoints } from '../endpoints.component';
 import { OfferForm } from '../models/offer-form.model';
 
@@ -14,10 +13,6 @@ let url = AppEndPoints.ENDPOINTOFERTAS;
 @Injectable({ providedIn: 'root' })
 
 export class AuthService {
-
-    // private user$: BehaviorSubject<any>;
-    // public userObservable: Observable<any>;
-    // public user;
 
     constructor(
         private http: HttpClient,

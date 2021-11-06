@@ -22,7 +22,7 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  isLogged() {
-    this.authService.isLogged();
+  isLogged(): boolean {
+    return this.authService.isLogged();
   }
 }

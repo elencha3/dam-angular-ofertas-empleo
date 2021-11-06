@@ -40,7 +40,6 @@ export class AdminComponent implements OnInit {
     this.authService.deleteOffer(id).subscribe(
       (response) => {
         console.log(response);
-       
       },
       (error) => {
         console.log('Error ' + JSON.stringify(error));
@@ -57,11 +56,6 @@ export class AdminComponent implements OnInit {
       confirmButtonText: 'Confirmar'
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
         window.location.reload();
       }
     })

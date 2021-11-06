@@ -12,6 +12,7 @@ export class OfferDetailComponent implements OnInit {
 
   public sub: any;
   public offerDetails: Offer = new Offer();
+  public logged: boolean;
 
 
   constructor(
@@ -24,6 +25,7 @@ export class OfferDetailComponent implements OnInit {
   ngOnInit(): void {
 
     this.showOfferDetail();
+    this.authService.isLogged();
   }
 
   showOfferDetail() {
@@ -38,7 +40,14 @@ export class OfferDetailComponent implements OnInit {
         }
       )
     });
-    
   }
 
+  goBack(){
+    if(this.authService.isLogged()){
+      this.router.navigate(['/admin']);
+    } else {
+      this.router.navigate(['/home']);
+    }
+
+  }
 }

@@ -39,11 +39,13 @@ export class LoginComponent implements OnInit {
       this.formularioLogin.value.pass,
       this.formularioLogin.value.check
     );
+    console.log(userLog)
 
     this.authService
       .login(userLog.nombre, userLog.pass, userLog.check)
       .subscribe(
         (response) => {
+          console.log(response)
           this.authService.setToken(response.id_token);
           this.router.navigate(['/admin']);
         },
