@@ -1,3 +1,52 @@
+<div class="container text-center mt-5">
+  <h1>Detalle de oferta: {{this.offerDetails.id}} </h1>
+</div>
+
+<section class="vh-100 ">
+    <div class="container py-0 h-100">
+        <div class="row d-flex justify-content-center align-items-center p-5">
+            <div class="bg-light col-6 col-md-8 col-lg-12 col-xl-12 py-5 px-4 rounded">
+                <div class="text-center mb-5">
+                    <h1>{{this.offerDetails.titulo}}</h1>
+                </div>
+                <table class="table">
+                    <tbody class="">
+                        <tr>
+                            <th>Descripción</th>
+
+                            <td class="tdbreak">{{this.offerDetails.descripcion}}</td>
+                        </tr>
+                        <tr>
+                            <th>Empresa</th>
+
+                            <td>{{this.offerDetails.empresa}}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Salario</th>
+                            <td>{{this.offerDetails.salario | currency:'EUR' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Ciudad</th>
+                            <td>{{this.offerDetails.ciudad}}</td>
+                        </tr>
+                        <tr>
+                            <th>Salario</th>
+                            <td>{{this.offerDetails.email}}</td>
+                        </tr>
+                    </tbody>
+                    
+                </table>
+                <div class="justify-content-center d-flex mt-4">
+                  <button class="btn btn-outline-dark " (click)="goBack()"><i class="fa fa-arrow-left"></i> Atrás</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 
 <div class="container ">
     <div class="row divcenter">
         <div class="col-md-12 ">
@@ -18,3 +67,74 @@
         </div>
     </div>
 </div>
+
+<div class="container-sm bg-light ">
+    <div class="row divcenter">
+        <div class="col-md-12 ">
+            <h1>{{this.offerDetails.titulo}}</h1>
+<table class="table py-3">
+    <tbody>
+      <tr>
+        <th>Descripcion</th>
+        
+        <td>{{this.offerDetails.descripcion}}</td>
+      </tr>
+      <tr>
+        <th>Empresa</th>
+        
+        <td>{{this.offerDetails.empresa}}</td>
+      </tr>
+      
+      <tr>
+        <th>Salario</th>
+        <td>{{this.offerDetails.salario | currency:'EUR' }}</td>
+      </tr>
+      <tr>
+        <th>Ciudad</th>
+        <td>{{this.offerDetails.ciudad}}</td>
+      </tr>
+      <tr>
+        <th>Salario</th>
+        <td>{{this.offerDetails.email}}</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  </div>
+  </div>
+
+<section class="vh-100 ">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-12 col-xl-6">
+                <table class="table py-3">
+                    <tbody>
+                      <tr>
+                        <th>Descripcion</th>
+                        
+                        <td>{{this.offerDetails.descripcion}}</td>
+                      </tr>
+                      <tr>
+                        <th>Empresa</th>
+                        
+                        <td>{{this.offerDetails.empresa}}</td>
+                      </tr>
+                      
+                      <tr>
+                        <th>Salario</th>
+                        <td>{{this.offerDetails.salario | currency:'EUR' }}</td>
+                      </tr>
+                      <tr>
+                        <th>Ciudad</th>
+                        <td>{{this.offerDetails.ciudad}}</td>
+                      </tr>
+                      <tr>
+                        <th>Salario</th>
+                        <td>{{this.offerDetails.email}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+    </div>
+</section> -->

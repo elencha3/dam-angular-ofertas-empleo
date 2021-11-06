@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { OfferForm } from 'src/app/models/offer-form.model';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-register-offer',
@@ -20,7 +21,6 @@ export class RegisterOfferComponent implements OnInit {
     private router: Router
     
   ) { 
-    // this.authService.userObservable.subscribe(x => this.user = x);
   }
 
   ngOnInit(): void {
@@ -28,12 +28,12 @@ export class RegisterOfferComponent implements OnInit {
   }
 
   offerFormRegister = this.formBuilder.group({
-    titulo: ['', Validators.compose([Validators.required, Validators.maxLength(100)])],
-    descripcion: ['', Validators.compose([Validators.required, Validators.maxLength(300)])],
-    empresa:  ['', Validators.compose([Validators.required, Validators.maxLength(50)])],
+    titulo: ['', [Validators.required, Validators.maxLength(100)]],
+    descripcion: ['', [Validators.required, Validators.maxLength(300)]],
+    empresa:  ['', [Validators.required, Validators.maxLength(50)]],
     salario: ['', Validators.required],
-    ciudad: ['', Validators.compose([Validators.required, Validators.maxLength(50)])],
-    email: ['', Validators.compose([Validators.email, Validators.required, Validators.maxLength(50)])],
+    ciudad: ['', [Validators.required, Validators.maxLength(50)]],
+    email: ['', [Validators.email, Validators.required, Validators.maxLength(50)]],
 });
 
   addOffer(): void{
@@ -45,21 +45,20 @@ export class RegisterOfferComponent implements OnInit {
       this.offerFormRegister.value.ciudad,
       this.offerFormRegister.value.email,
     )
-    this.authService.postOffersData(offer).subscribe(offer => console.log(offer));
-    // Swal.fire({
-    //   title: 'La nueva oferta ha sido añadida',
-    //   showClass: {
-    //     popup: 'animate__animated animate__fadeInDown'
-    //   },
-    //   hideClass: {
-    //     popup: 'animate__animated animate__fadeOutUp'
-    //   }
+    console.log(offer)
+    this.authService.postOffersData(offer.titulo, offer.descripcion, offer.empresa, offer.salario, offer.ciudad, offer.email).subscribe(offer => console.log(offer));
+    Swal.fire({
+      title: 'La nueva oferta ha sido añadida',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      }
       
-    // })
-    
+    })
     this.router.navigate(['/admin']);
-    
-    
+  
 
   }
 

@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit {
     this.authService.getOffersData().subscribe(
       response =>{
         this.arrayOffersData = response; 
+        console.log(this.arrayOffersData.length)
       },
       error => {
         console.log('Error ' + JSON.stringify(error));

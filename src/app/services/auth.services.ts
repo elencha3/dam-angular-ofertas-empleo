@@ -54,12 +54,14 @@ export class AuthService {
         return this.http.get(url)
     }
 
-    public postOffersData(offer: OfferForm): Observable<any>{
+    public postOffersData(titulo:string, descripcion: string, empresa: string, salario: string, ciudad: string, email: string): Observable<any>{
         const headers = {
             'Authorization': `Bearer ${this.getToken()}`,
             'Content-Type': 'application/json',
         }
-        return this.http.post(url, offer, {headers});
+        console.log("Añadida");
+        return this.http.post(url, {titulo, descripcion, empresa, salario, ciudad, email}, {headers});
+       
     }
 
     public deleteOffer(id:string): Observable<any>{
