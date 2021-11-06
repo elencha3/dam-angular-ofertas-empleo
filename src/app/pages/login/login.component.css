@@ -37,7 +37,7 @@ input:not([type="submit"]:not[type="checkbox"]){
     font-size: 1.5rem;
     text-transform: uppercase;
     background-color:#b92cf5;
-    border-color: blueviolet;
+    border-color: #8a2be2;
 }
 
 .btn:hover{

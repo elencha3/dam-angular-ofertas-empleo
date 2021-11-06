@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { OfferForm } from 'src/app/models/offer-form.model';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register-offer',
@@ -46,6 +47,15 @@ export class RegisterOfferComponent implements OnInit {
       this.offerFormRegister.value.email,
     )
     this.authService.postOffersData(offer).subscribe(offer => console.log(offer));
+    Swal.fire({
+      title: 'La nueva oferta ha sido añadida',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      }
+    })
     this.router.navigate(['/admin']);
 
   }
