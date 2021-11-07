@@ -61,7 +61,6 @@ export class AuthService {
         }
         console.log("Añadida");
         return this.http.post(url, {titulo, descripcion, empresa, salario, ciudad, email}, {headers});
-       
     }
 
     public deleteOffer(id:string): Observable<any>{

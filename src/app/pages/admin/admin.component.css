@@ -22,3 +22,6 @@ h1{
     font-size: 1.5rem;
     text-transform: uppercase;
 }
+.recuento:hover{
+    background-color:aqua;
+}

@@ -1,6 +1,6 @@
 import { AuthService } from './../../services/auth.services';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginForm } from 'src/app/models/login-form.model';
 
@@ -12,46 +12,61 @@ import { LoginForm } from 'src/app/models/login-form.model';
 })
 
 export class LoginComponent implements OnInit {
+
+  formularioLogin: FormGroup;
+  enviado: boolean = false;
+  errorMsg!: string | null;
+  isLoading: boolean = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private authService: AuthService
-  ) {}
+  ) {
+    this.formularioLogin = this.formBuilder.group({
+      nombre: ['', Validators.required],
+      pass: ['', [Validators.required, Validators.minLength(4)],
+      ],
+      check: ['', ''],
+    });
+  }
 
   ngOnInit(): void {
     this.authService.isLogged();
   }
 
-  formularioLogin = this.formBuilder.group({
-    nombre: ['', Validators.required],
-    pass: [
-      '',
-      Validators.compose([Validators.required, Validators.minLength(4)]),
-    ],
-    check: ['', ''],
-  });
+  
 
   enviarFormulario(): void {
-    console.log('Enviando login');
+
+    this.enviado = true;
+    if(!this.formularioLogin.valid){
+      return;
+    }
+    this.isLoading = true;
     //Convertir datos form a objeto
     let userLog: LoginForm = new LoginForm(
       this.formularioLogin.value.nombre,
       this.formularioLogin.value.pass,
       this.formularioLogin.value.check
     );
-    console.log(userLog)
-
     this.authService
       .login(userLog.nombre, userLog.pass, userLog.check)
       .subscribe(
         (response) => {
-          console.log(response)
+          console.log(JSON.stringify(response))
           this.authService.setToken(response.id_token);
+          this.isLoading = false;
+          this.errorMsg = null;
           this.router.navigate(['/admin']);
         },
         (error) => {
           window.alert('Las credenciales no son correctas');
-          console.log('error');
+          this.errorMsg = `⚠️¡No se ha podido iniciar sesión!' ((${error.error?.error}))`;
+          console.log('ERROR: ' + JSON.stringify(error));
+          this.isLoading = false;
+        }, () =>{
+          this.isLoading = false;
         }
       );
   }

@@ -47,16 +47,16 @@ export class RegisterOfferComponent implements OnInit {
     )
     console.log(offer)
     this.authService.postOffersData(offer.titulo, offer.descripcion, offer.empresa, offer.salario, offer.ciudad, offer.email).subscribe(offer => console.log(offer));
-    Swal.fire({
-      title: 'La nueva oferta ha sido añadida',
-      showClass: {
-        popup: 'animate__animated animate__fadeInDown'
-      },
-      hideClass: {
-        popup: 'animate__animated animate__fadeOutUp'
-      }
+    // Swal.fire({
+    //   title: 'La nueva oferta ha sido añadida',
+    //   showClass: {
+    //     popup: 'animate__animated animate__fadeInDown'
+    //   },
+    //   hideClass: {
+    //     popup: 'animate__animated animate__fadeOutUp'
+    //   }
       
-    })
+    // })
     this.router.navigate(['/admin']);
   
 
