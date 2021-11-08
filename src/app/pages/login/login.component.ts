@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/admin']);
         },
         (error) => {
-          this.errorMsg = '¡Las credenciales no son correctas!' 
+          this.errorMsg = '¡No ha sido posible iniciar sesión!' 
           console.log('ERROR: ' + JSON.stringify(error));
           this.isLoading = false;
         }, () =>{
