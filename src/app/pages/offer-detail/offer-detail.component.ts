@@ -28,6 +28,8 @@ export class OfferDetailComponent implements OnInit {
     this.authService.isLogged();
   }
 
+  //Suscripción al servicio para hacer petición GET al detalle según el id de la oferta que pasamos.
+
   showOfferDetail() {
     this.sub = this.route.paramMap.subscribe((params: ParamMap) =>{
       let id = params.get('id');
@@ -41,6 +43,8 @@ export class OfferDetailComponent implements OnInit {
       )
     });
   }
+
+  //Botón de atrás para volver a ver todas las ofertas del panel de admin si estamos logados o de home si no lo estamos.
 
   goBack(){
     if(this.authService.isLogged()){

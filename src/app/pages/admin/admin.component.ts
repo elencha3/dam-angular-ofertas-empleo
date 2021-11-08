@@ -21,6 +21,8 @@ export class AdminComponent implements OnInit {
     private router: Router
   ) {}
 
+  //Llamo al servicio a la función GET para recoger las ofertas y mostrarlas en pantalla
+
   ngOnInit(): void {
     this.authService.isLogged();
 
@@ -34,10 +36,13 @@ export class AdminComponent implements OnInit {
     );
   }
 
+  //Entrar en el detalle de cada oferta
+
   public viewOfferDetail(id): void {
     this.router.navigate(['offerdetail', id]);
   }
 
+ //Llamo al servicio a la función DELETE pasándole el ID de la oferta para eliminarla.
   public deleteOffer(id) {
     this.authService.deleteOffer(id).subscribe(
       (response) => {
@@ -47,7 +52,7 @@ export class AdminComponent implements OnInit {
         console.log('Error ' + JSON.stringify(error));
       }
     );
-
+  //Mostrar popup de confirmación al eliminar.    
     Swal.fire({
       title: 'Vas a borrar una oferta, ¿estás seguro?',
       text: "No podrás recuperarla",

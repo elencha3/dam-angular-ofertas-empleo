@@ -25,6 +25,7 @@ export class RegisterOfferComponent implements OnInit {
     private router: Router
     
   ) { 
+    //Validaciones del formulario
     this.offerFormRegister = this.formBuilder.group({
       titulo: ['', [Validators.required, Validators.maxLength(100)]],
       descripcion: ['', [Validators.required, Validators.maxLength(300)]],
@@ -56,6 +57,7 @@ export class RegisterOfferComponent implements OnInit {
       this.offerFormRegister.value.email,
     )
     console.log(offer)
+    //LLamamos al servicio para hacer la petición POST y añadir una oferta nueva pasándole los campos rellenados por el usuario
     this.authService
     .postOffersData(offer.titulo, offer.descripcion, offer.empresa, offer.salario, offer.ciudad, offer.email)
     .subscribe(
@@ -70,18 +72,21 @@ export class RegisterOfferComponent implements OnInit {
         this.isLoading = false;
       }, () =>{
         this.isLoading = false;
+      
       }
     );
-    // Swal.fire({
-    //   title: 'La nueva oferta ha sido añadida',
-    //   showClass: {
-    //     popup: 'animate__animated animate__fadeInDown'
-    //   },
-    //   hideClass: {
-    //     popup: 'animate__animated animate__fadeOutUp'
-    //   }
+    //Popup de feedback que la oferta ha sido añadida
+    Swal.fire({
+      title: 'La nueva oferta ha sido añadida',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      }
       
-    // })
+    })
+    //Tengo que refrescar la página para que se muestre la nueva oferta, no he conseguido que se actualice sola.
     this.router.navigate(['/admin']);
   
 

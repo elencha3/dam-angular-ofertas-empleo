@@ -10,8 +10,9 @@ export class FilterPipe implements PipeTransform {
     if(!value)return null;
     if(!searchText)return value;
 
+    //Convertir a lowercase los inputs del usuario
     searchText = searchText.toLowerCase();
-
+    //filtrar por los datos del array que incluyen el searchtext
     return value.filter(function(data){
         return JSON.stringify(data).toLowerCase().includes(searchText);
     });

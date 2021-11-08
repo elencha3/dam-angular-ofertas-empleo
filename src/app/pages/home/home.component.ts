@@ -12,6 +12,7 @@ import { FilterPipe } from 'src/app/pipes/filter.pipe';
 })
 export class HomeComponent implements OnInit {
 
+  //Variable para usar pipe de filtrado.
   searchText ="";
   public arrayOffersData: Array<any>;
 
@@ -22,7 +23,8 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
 
     this.authService.isLogged();
-    
+    //Llamo al servicio a la función GET para recoger las ofertas y mostrarlas en pantalla
+
     this.authService.getOffersData().subscribe(
       response =>{
         this.arrayOffersData = response; 
@@ -32,7 +34,7 @@ export class HomeComponent implements OnInit {
       }
   )
   }
-
+  //entrar en el detalle de cada oferta
   public viewOfferDetail(id): void{
     this.router.navigate(['offerdetail', id]);
   }
