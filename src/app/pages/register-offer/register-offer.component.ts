@@ -1,6 +1,6 @@
 import { AuthService } from './../../services/auth.services';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OfferForm } from 'src/app/models/offer-form.model';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -14,29 +14,39 @@ import { stringify } from 'querystring';
 })
 export class RegisterOfferComponent implements OnInit {
 
-
+  offerFormRegister: FormGroup;
+  enviado: boolean = false;
+  errorMsg!: string | null;
+  isLoading: boolean = false;
+  
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router
     
   ) { 
+    this.offerFormRegister = this.formBuilder.group({
+      titulo: ['', [Validators.required, Validators.maxLength(100)]],
+      descripcion: ['', [Validators.required, Validators.maxLength(300)]],
+      empresa:  ['', [Validators.required, Validators.maxLength(50)]],
+      salario: ['', Validators.required],
+      ciudad: ['', [Validators.required, Validators.maxLength(50)]],
+      email: ['', [Validators.email, Validators.required, Validators.maxLength(50)]],
+  });
+  
   }
 
   ngOnInit(): void {
     this.authService.isLogged();
   }
 
-  offerFormRegister = this.formBuilder.group({
-    titulo: ['', [Validators.required, Validators.maxLength(100)]],
-    descripcion: ['', [Validators.required, Validators.maxLength(300)]],
-    empresa:  ['', [Validators.required, Validators.maxLength(50)]],
-    salario: ['', Validators.required],
-    ciudad: ['', [Validators.required, Validators.maxLength(50)]],
-    email: ['', [Validators.email, Validators.required, Validators.maxLength(50)]],
-});
-
+  
   addOffer(): void{
+    this.enviado = true;
+    if(!this.offerFormRegister.valid){
+      return;
+    }
+    this.isLoading = true;
     let offer: OfferForm = new OfferForm(
       this.offerFormRegister.value.titulo,
       this.offerFormRegister.value.descripcion,
@@ -46,7 +56,22 @@ export class RegisterOfferComponent implements OnInit {
       this.offerFormRegister.value.email,
     )
     console.log(offer)
-    this.authService.postOffersData(offer.titulo, offer.descripcion, offer.empresa, offer.salario, offer.ciudad, offer.email).subscribe(offer => console.log(offer));
+    this.authService
+    .postOffersData(offer.titulo, offer.descripcion, offer.empresa, offer.salario, offer.ciudad, offer.email)
+    .subscribe(
+      (response) => {
+        console.log(JSON.stringify(response))
+        this.isLoading = false;
+        this.errorMsg = null;
+        this.router.navigate(['/admin']);
+      },
+      (error) => {
+        this.errorMsg = '¡Rellena todos los campos!' 
+        this.isLoading = false;
+      }, () =>{
+        this.isLoading = false;
+      }
+    );
     // Swal.fire({
     //   title: 'La nueva oferta ha sido añadida',
     //   showClass: {

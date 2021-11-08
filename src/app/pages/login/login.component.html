@@ -40,6 +40,7 @@
                                     value="enviar">
                                     <span class="spinner-border spinner-border-sm mr-1" *ngIf="isLoading"></span>
                                     Login</button>
+                                    <div *ngIf="errorMsg" class="alert alert-danger text-center m-3 ">{{errorMsg}}</div>
                             </form>
                         </div>
                     </div>

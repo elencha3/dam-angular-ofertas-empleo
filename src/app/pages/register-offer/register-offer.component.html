@@ -15,8 +15,11 @@
                     required = "required"
                     data-error = "El titulo es obligatorio"
                     formControlName = "titulo"
-                    class="form-control">
-                    <small id="passHelp" class="form-text text-muted">Máximo 100 caracteres</small>
+                    class="form-control is-invalid"
+                    [ngClass] = "{
+                        'is-invalid': this.enviado && this.offerFormRegister.controls.titulo.errors
+                    }">
+                    <div class="invalid-feedback" *ngIf="enviado && this.offerFormRegister.controls.titulo.errors?.required" >Tienes que rellenar este campo</div>
                 </div>
                 <div class="mb-3">
                     <label for="descripcion" class="form-label">Descripcion*</label>
@@ -26,7 +29,11 @@
                     required = "required"
                     data-error = "Al menos un apellido es obligatorio" 
                     formControlName = "descripcion"
-                    class="form-control"> </textarea>
+                    class="form-control is-invalid"
+                    [ngClass] = "{
+                        'is-invalid': this.enviado && this.offerFormRegister.controls.descripcion.errors
+                    }"> </textarea>
+                    <div class="invalid-feedback" *ngIf="enviado && this.offerFormRegister.controls.titulo.errors?.required" >Tienes que rellenar este campo</div>
                 </div>
                 <div class="mb-3">
                     <label for="empresa" class="form-label">Empresa*</label>
@@ -36,7 +43,11 @@
                     required = "required"
                     data-error = "El nombre de la empresa es obligatorio" 
                     formControlName = "empresa"
-                    class="form-control">
+                    class="form-control is-invalid"
+                    [ngClass] = "{
+                        'is-invalid': this.enviado && this.offerFormRegister.controls.empresa.errors
+                    }">
+                    <div class="invalid-feedback" *ngIf="enviado && this.offerFormRegister.controls.titulo.errors?.required" >Tienes que rellenar este campo</div>
                 </div>
                 <div class="mb-3">
                     <label for="salario" class="form-label">Salario*</label>
@@ -44,7 +55,11 @@
                     name = "salario"
                     placeholder="Salario en €"
                     formControlName = "salario"
-                    class = "form-control">
+                    class = "form-control is-invalid"
+                    [ngClass] = "{
+                        'is-invalid': this.enviado && this.offerFormRegister.controls.salario.errors
+                    }">
+                    <div class="invalid-feedback" *ngIf="enviado && this.offerFormRegister.controls.salario.errors?.required" >Tienes que rellenar este campo</div>
                 </div>
                 <div class="mb-3">
                     <label for="ciudad" class="form-label">Ciudad*</label>
@@ -52,7 +67,11 @@
                     name = "ciudad"
                     placeholder="Introduce la ciudad"
                     formControlName = "ciudad"
-                    class = "form-control">
+                    class = "form-control is-invalid"
+                    [ngClass] = "{
+                        'is-invalid': this.enviado && this.offerFormRegister.controls.ciudad.errors
+                    }">
+                    <div class="invalid-feedback" *ngIf="enviado && this.offerFormRegister.controls.ciudad.errors?.required" >Tienes que rellenar este campo</div>
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email*</label>
@@ -62,12 +81,15 @@
                     required = "required"
                     data-error = "El email es obligatorio" 
                     formControlName = "email"
-                    class="form-control">
+                    class="form-control is-invalid"
+                    [ngClass] = "{
+                        'is-invalid': this.enviado && this.offerFormRegister.controls.email.errors
+                    }">
+                    <div class="invalid-feedback" *ngIf="enviado && this.offerFormRegister.controls.email.errors?.required" >Tienes que rellenar este campo</div>
                 </div>
                 <div class="text-center">
                     <button type="submit"
                     class="btn btn-outline-info mb-4"
-                    [disabled] = "!offerFormRegister.valid"
                     value="enviar">Añadir Oferta</button>
                     <div class="alert alert-info" *ngIf="!offerFormRegister.valid">
                         Debe rellenar correctamente todos los campos.
