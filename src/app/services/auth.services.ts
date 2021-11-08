@@ -1,10 +1,7 @@
-import { Router } from '@angular/router';
-
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { AppEndPoints } from '../endpoints.component';
-import { OfferForm } from '../models/offer-form.model';
 
 let urlAuth = AppEndPoints.ENDPOINTSAUTH;
 let url = AppEndPoints.ENDPOINTOFERTAS;
@@ -45,16 +42,16 @@ export class AuthService {
         }
     }
 
-    public getOffersData(): Observable<any>{
+    getOffersData(): Observable<any>{
         return this.http.get(url);
     }
 
-    public getOfferDetail(id: string): Observable<any>{
+    getOfferDetail(id: string): Observable<any>{
         let url = `${AppEndPoints.ENDPOINTOFERTAS}/${id}`;
         return this.http.get(url)
     }
 
-    public postOffersData(titulo:string, descripcion: string, empresa: string, salario: string, ciudad: string, email: string): Observable<any>{
+    postOffersData(titulo:string, descripcion: string, empresa: string, salario: string, ciudad: string, email: string): Observable<any>{
         const headers = {
             'Authorization': `Bearer ${this.getToken()}`,
             'Content-Type': 'application/json',
@@ -63,15 +60,14 @@ export class AuthService {
         return this.http.post(url, {titulo, descripcion, empresa, salario, ciudad, email}, {headers});
     }
 
-    public deleteOffer(id:string): Observable<any>{
+    deleteOffer(id:string): Observable<any>{
         let url = `${AppEndPoints.ENDPOINTOFERTAS}/${id}`;
         const headers = {
             'Authorization': `Bearer ${this.getToken()}`,
             'Content-Type': 'application/json',
         }
         console.log(this.http.delete(url,  {headers}));
-        return this.http.delete(url,  {headers});
-        
+        return this.http.delete(url,  {headers}); 
     }
 }
 

@@ -13,7 +13,6 @@
                     name="titulo" 
                     placeholder="Introduce título descriptivo de la oferta"
                     required = "required"
-                    data-error = "El titulo es obligatorio"
                     formControlName = "titulo"
                     class="form-control is-invalid"
                     [ngClass] = "{
@@ -22,18 +21,18 @@
                     <div class="invalid-feedback" *ngIf="enviado && this.offerFormRegister.controls.titulo.errors?.required" >Tienes que rellenar este campo</div>
                 </div>
                 <div class="mb-3">
-                    <label for="descripcion" class="form-label">Descripcion*</label>
+                    <label for="descripcion" class="form-label">Descripción*</label>
                     <textarea id="descripcion" cols="30" rows="5"
                     name="descripcion"
                     placeholder="Descripcion de la oferta"
                     required = "required"
-                    data-error = "Al menos un apellido es obligatorio" 
                     formControlName = "descripcion"
                     class="form-control is-invalid"
                     [ngClass] = "{
                         'is-invalid': this.enviado && this.offerFormRegister.controls.descripcion.errors
                     }"> </textarea>
-                    <div class="invalid-feedback" *ngIf="enviado && this.offerFormRegister.controls.titulo.errors?.required" >Tienes que rellenar este campo</div>
+                    <div class="invalid-feedback" *ngIf="enviado && this.offerFormRegister.controls.descripcion.errors?.required" >Tienes que rellenar este campo</div>
+                    <div class="invalid-feedback" *ngIf="enviado && this.offerFormRegister.controls.descripcion.errors?.maxlength" >Máximo 500 caracteres</div>
                 </div>
                 <div class="mb-3">
                     <label for="empresa" class="form-label">Empresa*</label>
@@ -41,7 +40,6 @@
                     name="telf"
                     placeholder="Introduce nombre de la empresa"
                     required = "required"
-                    data-error = "El nombre de la empresa es obligatorio" 
                     formControlName = "empresa"
                     class="form-control is-invalid"
                     [ngClass] = "{
@@ -53,7 +51,7 @@
                     <label for="salario" class="form-label">Salario*</label>
                     <input id="salario" type="number" 
                     name = "salario"
-                    placeholder="Salario en €"
+                    placeholder="Salario"
                     formControlName = "salario"
                     class = "form-control is-invalid"
                     [ngClass] = "{
@@ -79,7 +77,6 @@
                     name="email"
                     placeholder="Introduce el email al que mandar el CV"
                     required = "required"
-                    data-error = "El email es obligatorio" 
                     formControlName = "email"
                     class="form-control is-invalid"
                     [ngClass] = "{

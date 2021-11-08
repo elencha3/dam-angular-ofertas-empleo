@@ -4,13 +4,12 @@
             <h1>OFERTAS DE EMPLEO</h1>
         </div>
     </div>
-    <div class="container  ">
+    <div class="container">
         <div class="container col-4 my-5">
-            <div class=" ">
+            <div>
                 <input type="search" class="form-control rounded " [(ngModel)]="searchText" placeholder="Buscar oferta">
             </div>
         </div>
-        
         <table class="table">
             <thead>
                 <tr>
@@ -18,10 +17,8 @@
                     <th scope="col">Título</th>
                     <th scope="col" class="text-center">Ver más</th>
                 </tr>
-                
             </thead>
             <tbody>
-                
                 <tr *ngFor="let item of this.arrayOffersData | filter: searchText; let i = index ">
                     <th scope="row">{{ i + 1 }}</th>
                     <td>{{ item.titulo }}</td>
