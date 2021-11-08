@@ -1,35 +1,35 @@
 export class LoginForm {
     //Declaro la clase formulario de login con todos los campos que tendrá mi formulario de login
 
-    private _nombre: string;
-    private _pass: string;
-    private _check: boolean;
+    private username: string;
+    private password: string;
+    private rememberMe: boolean;
     
-    constructor(nombre: string, pass: string, check: boolean) {
-            this._nombre = nombre;
-            this._pass = pass;
-            this._check = check;
+    constructor(_username: string, _password: string, _rememberMe: boolean) {
+        this.username = _username;
+        this.password = _password;
+        this.rememberMe = _rememberMe
         }
     
     get nombre(): string {
-        return this._nombre;
+        return this.username;
     }
     set nombre(value: string) {
-        this._nombre = value;
+        this.username = value;
     }
 
     get pass(): string {
-        return this._pass;
+        return this.password;
     }
     set pass(value: string) {
-        this._pass = value;
+        this.password = value;
     }
 
     get check(): boolean {
-        return this._check;
+        return this.rememberMe;
     }
     set check(value: boolean) {
-        this._check = value;
+        this.rememberMe = value;
     }
     
 }

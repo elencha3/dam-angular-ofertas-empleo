@@ -1,5 +1,5 @@
 import { AuthService } from './services/auth.services';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -9,6 +9,7 @@ import { PagesModule } from './pages/pages.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
 import { AuthGuard } from './guards/authGuard';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { AuthGuard } from './guards/authGuard';
   ],
   providers: [
     AuthService,
-    AuthGuard    
+    AuthGuard,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}    
   ],
   bootstrap: [AppComponent]
 })

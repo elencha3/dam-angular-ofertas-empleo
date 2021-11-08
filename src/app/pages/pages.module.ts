@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { OfferDetailComponent } from './offer-detail/offer-detail.component';
 import { ComponentsModule } from '../components/components.module';
 import { FilterPipe } from '../pipes/filter.pipe';
+import { AppRoutingModule } from '../app-routing.module';
 
 @NgModule({
     declarations: [
@@ -23,6 +24,7 @@ import { FilterPipe } from '../pipes/filter.pipe';
     ],
     imports: [ 
         CommonModule,
+        AppRoutingModule,
         ReactiveFormsModule,
         FormsModule,
         HttpClientModule,

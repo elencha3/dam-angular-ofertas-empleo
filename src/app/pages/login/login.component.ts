@@ -32,41 +32,72 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.isLogged();
+    console.log(this.authService.loginValue())
   }
 
-  
-
-  enviarFormulario(): void {
-
+  submitForm() {
+    //Pasarlo a true para gestionar is invalid
     this.enviado = true;
     if(!this.formularioLogin.valid){
       return;
     }
     this.isLoading = true;
-    //Convertir datos form a objeto
     let userLog: LoginForm = new LoginForm(
       this.formularioLogin.value.nombre,
       this.formularioLogin.value.pass,
       this.formularioLogin.value.check
     );
-    this.authService
-      .login(userLog.nombre, userLog.pass, userLog.check)
-      .subscribe(
-        (response) => {
-          console.log(JSON.stringify(response))
-          this.authService.setToken(response.id_token);
-          this.isLoading = false;
-          this.errorMsg = null;
-          this.router.navigate(['/admin']);
-        },
-        (error) => {
-          this.errorMsg = '¡No ha sido posible iniciar sesión!' 
-          console.log('ERROR: ' + JSON.stringify(error));
-          this.isLoading = false;
-        }, () =>{
-          this.isLoading = false;
-        }
-      );
-  }
+    this.authService.performLogin(userLog)
+    .subscribe(
+      respuesta => {
+      console.log(JSON.stringify(respuesta));
+      this.isLoading = false;
+      this.errorMsg = null;
+      this.router.navigate['/admin']
+      
+    },
+      error =>{
+      this.errorMsg = `⚠️¡No se ha podido iniciar sesión!' ((${error.error?.error}))`;
+      console.log('ERROR: ' + JSON.stringify(error));
+      this.isLoading = false;
+    }, () =>{
+      this.isLoading = false;
+      this.router.navigate(['/admin']);
+    });
+
+
+  } 
+
+  // enviarFormulario(): void {
+
+  //   this.enviado = true;
+  //   if(!this.formularioLogin.valid){
+  //     return;
+  //   }
+  //   this.isLoading = true;
+  //   //Convertir datos form a objeto
+  //   let userLog: LoginForm = new LoginForm(
+  //     this.formularioLogin.value.nombre,
+  //     this.formularioLogin.value.pass,
+  //     this.formularioLogin.value.check
+  //   );
+  //   this.authService
+  //     .login(userLog.nombre, userLog.pass, userLog.check)
+  //     .subscribe(
+  //       (response) => {
+  //         console.log(JSON.stringify(response))
+  //         this.authService.setToken(response.id_token);
+  //         this.isLoading = false;
+  //         this.errorMsg = null;
+  //         this.router.navigate(['/admin']);
+  //       },
+  //       (error) => {
+  //         this.errorMsg = '¡No ha sido posible iniciar sesión!' 
+  //         console.log('ERROR: ' + JSON.stringify(error));
+  //         this.isLoading = false;
+  //       }, () =>{
+  //         this.isLoading = false;
+  //       }
+  //     );
+  // }
 }

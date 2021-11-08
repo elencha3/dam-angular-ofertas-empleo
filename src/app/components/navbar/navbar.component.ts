@@ -1,3 +1,4 @@
+import { LoginForm } from 'src/app/models/login-form.model';
 import { AuthService } from './../../services/auth.services';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -10,19 +11,32 @@ import { Router } from '@angular/router';
 })
 
 export class NavbarComponent implements OnInit {
-  constructor(private router: Router, private authService: AuthService) {}
+
+  usuario!: LoginForm | null;
+
+  constructor(private router: Router, private authService: AuthService) {
+    this.usuario = authService.loginValue();
+    authService.user.subscribe( usuario => this.usuario = usuario)
+  }
 
   ngOnInit(): void {
     console.log(this.authService.isLogged());
   }
 
-  logout() {
-    this.authService.logout();
-    console.log(this.authService.getToken());
-    this.router.navigate(['/login']);
+  // logout() {
+  //   this.authService.logout();
+  //   console.log(this.authService.getToken());
+  //   this.router.navigate(['/login']);
+  // }
+
+  hayUsuario(): boolean {
+    return this.usuario != null;
   }
 
-  isLogged(): boolean {
-    return this.authService.isLogged();
+
+  logout() {
+    this.authService.performLogout();
+    this.usuario = null;
   }
+  
 }

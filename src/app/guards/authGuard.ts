@@ -1,24 +1,34 @@
 import { Injectable } from "@angular/core";
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from "@angular/router";
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
+import { Observable } from "rxjs";
+import { LoginForm } from "../models/login-form.model";
 import { AuthService } from "../services/auth.services";
 
 
 @Injectable()
 export class AuthGuard implements CanActivate {
     
-    constructor(
-        private authService: AuthService,
-        private router: Router) { }
+    constructor(private router: Router,
+        private authService: AuthService) {
+}
     
-        canActivate (
+    canActivate(
         route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot): boolean  {
-        let isAuthenticated = this.authService.isLogged();
+        state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
         
-        if (!isAuthenticated) {
-            window.alert("No tienes permiso para acceder a esta página"); 
-            this.router.navigate(["login"],{ queryParams: { retUrl: route.url} });
-        } 
-        return isAuthenticated;
+            let loginValue = this.authService.loginValue();
+            console.log(loginValue)
+    
+        if (loginValue != null) {
+            return true;
+    
+        } else {
+            window.alert("no tienes permiso")
+            this.router.navigate(['/login'], {queryParams: {returnUrl: state.url}});
+            window.location.reload();
+            return false;
+        }
+    
     }
+
 }

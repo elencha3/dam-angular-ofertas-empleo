@@ -15,18 +15,18 @@
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
         <ul class="navbar-nav ms-auto">
 
-            <li class="nav-item" *ngIf="isLogged()" routerLink="/admin">
+            <li class="nav-item" *ngIf="usuario" routerLink="/admin">
                 <a class="btn nav-link">Admin</a>
             </li>
-            <li class="nav-item" *ngIf="isLogged()" [routerLink]="['/registerOffer']">
+            <li class="nav-item" *ngIf="usuario" [routerLink]="['/registerOffer']">
                 <a class="btn nav-link">Registrar oferta</a>
             </li>
 
-            <button class="btn btn-outline-info my-2 my-sm-0" routerLink="/login" routerLinkActive="active"
-                *ngIf="!isLogged()">Login</button>
+            <button class="btn btn-outline-info my-2 my-sm-0" *ngIf="!usuario" routerLink="/login" routerLinkActive="active"
+                >Login</button>
 
-            <button class="btn btn-outline-danger my-2 my-sm-0" (click)="logout()" routerLink="/login"
-                *ngIf="isLogged()">Logout</button>
+            <button class="btn btn-outline-danger my-2 my-sm-0" *ngIf="usuario" (click)="logout()" routerLink="/login"
+                >Logout</button>
 
         </ul>
     </div>
