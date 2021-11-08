@@ -8,9 +8,7 @@
     background-color: white;
     opacity: 0.9;
     padding: 2rem;
-    
 }
-
 
 h1{
     text-align: center;
@@ -25,3 +23,7 @@ h1{
 .recuento:hover{
     background-color:aqua;
 }
+
+/* thead {
+    text-align: center;
+} */

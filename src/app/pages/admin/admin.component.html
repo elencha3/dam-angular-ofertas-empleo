@@ -9,21 +9,26 @@
         </div>
     </div>
     <div class="container">
+        <div class="container col-4 mb-5">
+            <div class=" ">
+                <input type="search" class="form-control rounded " [(ngModel)]="searchText" placeholder="Buscar oferta">
+            </div>
+        </div>
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Título</th>
-                    <th scope="col">Ver más</th>
-                    <th scope="col">Eliminar</th>
+                    <th scope="col" class="text-center">Ver más</th>
+                    <th scope="col" class="text-center">Eliminar</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let item of this.arrayOffersData; let i = index">
+                <tr *ngFor="let item of this.arrayOffersData | filter: searchText; let i = index ">
                     <th scope="row">{{ i + 1 }}</th>
                     <td> {{ item.titulo }}</td>
-                    <td><a (click)="this.viewOfferDetail(item.id)" class="btn btn-link ">Detalle</a></td>
-                    <td><button class="btn" (click)="this.deleteOffer(item.id)"><i class="fa fa-trash"></i></button>
+                    <td class="text-center"><a (click)="this.viewOfferDetail(item.id)" class="btn btn-link ">Detalle</a></td>
+                    <td class="text-center"><button class="btn" (click)="this.deleteOffer(item.id)"><i class="fa fa-trash"></i></button>
                     </td>
                 </tr>
             </tbody>

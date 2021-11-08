@@ -2,16 +2,18 @@ import { AuthService } from './../../services/auth.services';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
+import { FilterPipe } from 'src/app/pipes/filter.pipe';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css'],
-  providers: [AuthService],
+  providers: [AuthService,FilterPipe],
 })
 export class AdminComponent implements OnInit {
   public arrayOffersData: Array<any>;
   public sub: any;
+  searchText ="";
 
   constructor(
     private authService: AuthService,

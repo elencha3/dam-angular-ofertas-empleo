@@ -16,7 +16,7 @@ export class AuthGuard implements CanActivate {
         let isAuthenticated = this.authService.isLogged();
         
         if (!isAuthenticated) {
-            window.alert("no tienes permiso"); 
+            window.alert("No tienes permiso"); 
             this.router.navigate(["login"],{ queryParams: { retUrl: route.url} });
         } 
         return isAuthenticated;

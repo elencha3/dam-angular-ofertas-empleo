@@ -1,16 +1,18 @@
 import { AuthService } from './../../services/auth.services';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { FilterPipe } from 'src/app/pipes/filter.pipe';
 
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  providers: [AuthService]
+  providers: [AuthService,FilterPipe]
 })
 export class HomeComponent implements OnInit {
 
+  searchText ="";
   public arrayOffersData: Array<any>;
 
   constructor( 
@@ -24,7 +26,6 @@ export class HomeComponent implements OnInit {
     this.authService.getOffersData().subscribe(
       response =>{
         this.arrayOffersData = response; 
-        console.log(this.arrayOffersData.length)
       },
       error => {
         console.log('Error ' + JSON.stringify(error));
