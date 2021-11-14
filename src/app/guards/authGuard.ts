@@ -7,28 +7,27 @@ import { AuthService } from "../services/auth.services";
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-    
+
     constructor(private router: Router,
         private authService: AuthService) {
 }
-    
+
     canActivate(
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-        
+
             let loginValue = this.authService.loginValue();
             console.log(loginValue)
-    
+
         if (loginValue != null) {
             return true;
-    
+
         } else {
             window.alert("no tienes permiso")
             this.router.navigate(['/login'], {queryParams: {returnUrl: state.url}});
-            window.location.reload();
             return false;
         }
-    
+
     }
 
 }
